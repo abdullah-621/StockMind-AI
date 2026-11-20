@@ -1,0 +1,6 @@
+{
+  "name": "StockMind AI",
+  "description": "AI-Powered Manufacturing Inventory Intelligence & Dead Stock Recovery Platform for Garments and Textile Manufacturing.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

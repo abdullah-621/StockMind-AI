@@ -1,0 +1,981 @@
+# MASTER PROJECT DEVELOPMENT PROMPT
+## StockMind AI — AI-Powered Manufacturing Inventory Intelligence & Dead Stock Recovery Platform
+
+### 1. Your Role
+
+Act as a Senior Software Architect, Full-Stack Developer, AI/ML Engineer, Data Scientist, Database Architect, UI/UX Designer, and Technical Product Manager.
+
+Your responsibility is to design and develop a complete, intelligent, scalable, and professional web-based platform named **StockMind AI**.
+
+Do not treat this as a simple inventory management CRUD application. Build it as an AI-powered manufacturing inventory intelligence and decision-support platform specifically designed for the garments and textile manufacturing industry.
+
+You must follow professional software engineering practices, maintainable architecture, modular development, reliable data processing, explainable AI, and a modern user experience.
+
+---
+
+### 2. Project Identity
+
+**Project Name:** StockMind AI
+
+**Full Title:** AI-Powered Manufacturing Inventory Intelligence & Dead Stock Recovery Platform
+
+**Target Industry:** Garments and Textile Manufacturing
+
+**Initial Focus:** Knitwear and textile raw-material inventory management.
+
+**Primary Users:**
+- Factory Managers
+- Inventory Managers
+- Procurement Officers
+- Warehouse Managers
+- Production Planners
+- Business Decision-Makers
+
+**Core Vision:**
+
+StockMind AI aims to transform traditional inventory management into intelligent inventory decision-making.
+
+Traditional inventory systems primarily track stock quantities and movements. StockMind AI should go further by predicting inventory risks, identifying slow-moving and potentially dead stock, forecasting material demand, discovering alternative materials, and recommending ways to recover financial value from underutilized inventory.
+
+**Core Tagline:**
+
+"Predict the Problem. Find the Alternative. Recover the Value."
+
+**Main Value Proposition:**
+
+"We don't just detect inventory waste. We help businesses find ways to recover its value."
+
+---
+
+### 3. Core Project Objectives
+
+Develop a platform that can:
+
+1. Manage manufacturing inventory across multiple warehouses.
+2. Monitor inventory movement and material consumption.
+3. Identify excess, slow-moving, and potentially dead stock.
+4. Predict future material demand using machine learning.
+5. Identify potential stockout risks.
+6. Recommend optimal reorder quantities and purchasing decisions.
+7. Find potentially compatible alternative materials for production.
+8. Recommend dead-stock recovery strategies.
+9. Estimate potential financial recovery value.
+10. Provide explainable AI insights to support business decisions.
+11. Offer an AI-powered inventory assistant that answers questions using verified business data.
+12. Provide interactive dashboards and business intelligence reports.
+
+The platform must prioritize actionable recommendations rather than simply displaying inventory statistics.
+
+---
+
+### 4. Technology Stack
+
+Use the following technology stack unless a technical limitation justifies a documented alternative.
+
+**Frontend**
+- React.js
+- Vite
+- Tailwind CSS
+- JavaScript or TypeScript
+- Recharts or Plotly for interactive charts
+- Lucide React for icons
+
+**Backend**
+- Python
+- FastAPI
+- RESTful API architecture
+- Pydantic validation
+- SQLAlchemy ORM
+
+**Database**
+- MySQL
+- Proper relational database design
+- Foreign keys, indexes, constraints, and transaction management
+
+**Machine Learning and Data Science**
+- Python
+- Pandas
+- NumPy
+- Scikit-learn
+- XGBoost
+- LightGBM
+- SHAP
+- SciPy
+
+**AI and Generative AI**
+- Sentence Transformers
+- LangChain
+- LangGraph (for future agent workflows)
+- Retrieval-Augmented Generation (RAG)
+- Qdrant (vector database)
+- Python MCP SDK (for future MCP integration)
+
+**Optimization**
+- Google OR-Tools
+- SciPy Optimization
+
+**Model Management and Deployment**
+- MLflow for experiment tracking
+- Docker for containerization
+- Environment-based configuration
+- A suitable cloud deployment platform
+
+Do not introduce unnecessary technologies. Keep the initial MVP manageable and modular.
+
+---
+
+### 5. Main Application Modules
+
+#### Module 1: Authentication and Role-Based Access Control
+
+Implement a secure authentication system.
+
+Requirements:
+- User registration and login
+- JWT-based authentication
+- Password hashing
+- Role-based authorization
+- User profile management
+- Protected frontend routes
+- Secure API endpoints
+
+Suggested roles:
+- Admin
+- Inventory Manager
+- Procurement Officer
+- Warehouse Manager
+- Production Planner
+
+Each role should have appropriate permissions.
+
+#### Module 2: Smart Inventory Management
+
+Develop a complete manufacturing inventory management system.
+
+Inventory records should include:
+
+- Material ID
+- Material Name
+- Material Category
+- Material Type
+- Composition
+- Color
+- GSM
+- Width
+- Construction
+- Quality Grade
+- Unit of Measurement
+- Available Quantity
+- Reserved Quantity
+- Warehouse Location
+- Supplier
+- Purchase Price
+- Purchase Date
+- Last Movement Date
+- Batch or Lot Number
+- Minimum Stock Level
+- Lead Time
+
+Functionalities:
+- Add, update, delete, and view inventory
+- Search and filter materials
+- Category-based inventory management
+- Warehouse-based inventory tracking
+- Batch and lot tracking
+- Stock-in and stock-out operations
+- Inventory adjustment
+- Stock movement history
+- CSV and Excel import/export
+- Low-stock notifications
+
+Maintain an audit trail for important inventory changes.
+
+#### Module 3: Dead Stock and Slow-Moving Inventory Detection
+
+This is one of the most important modules.
+
+Develop an intelligent inventory risk detection system.
+
+The system should identify:
+
+- Healthy Stock
+- Slow-Moving Stock
+- Excess Stock
+- Potential Dead Stock
+- Critical Overstock
+- At-Risk Inventory
+
+Consider relevant features such as:
+
+- Days since last movement
+- Historical consumption rate
+- Average monthly demand
+- Inventory turnover
+- Available quantity
+- Reserved quantity
+- Upcoming production requirements
+- Seasonal demand
+- Material expiration or quality constraints, where applicable
+
+Use business rules as an initial baseline and evaluate machine learning models such as:
+
+- Random Forest
+- XGBoost
+- LightGBM
+- Isolation Forest for anomaly detection
+
+Important requirements:
+
+Do not classify a material as dead stock only because it has not moved for a fixed number of days.
+
+Consider future production demand, seasonality, reserved inventory, material condition, and business-specific rules.
+
+Where labelled historical data is unavailable, clearly distinguish rule-based risk categories from ML predictions.
+
+Provide:
+- Risk category
+- Risk score
+- Main contributing factors
+- Explanation of the prediction
+- Recommended next action
+
+Use SHAP where appropriate to explain model predictions.
+
+#### Module 4: AI-Based Demand Forecasting
+
+Develop a forecasting module to estimate future material demand.
+
+Input features may include:
+
+- Historical material consumption
+- Production orders
+- Seasonal patterns
+- Day, week, and month
+- Material category
+- Production requirements
+- Historical purchasing patterns
+- Supplier lead time
+
+Evaluate suitable approaches:
+
+- Moving Average
+- Exponential Smoothing
+- Seasonal Naive Baseline
+- Random Forest
+- XGBoost
+- LightGBM
+
+Requirements:
+- Forecast material demand for configurable future periods.
+- Display historical demand and predicted demand.
+- Support material-level forecasting.
+- Compare actual and predicted consumption.
+- Show forecast uncertainty where possible.
+- Explain the most influential factors.
+
+Use chronological train-validation-test splitting. Never randomly shuffle time-series observations in a way that creates future-data leakage.
+
+Evaluation metrics:
+- MAE
+- RMSE
+- WAPE
+
+Do not claim a model is accurate without evaluating it on a proper held-out dataset.
+
+#### Module 5: Stockout Risk and Intelligent Reorder Recommendation
+
+Build a system that identifies potential material shortages before they occur.
+
+Consider:
+
+- Current stock
+- Reserved stock
+- Average daily demand
+- Forecasted demand
+- Supplier lead time
+- Safety stock
+- Incoming purchase orders
+- Production commitments
+
+Use an explainable reorder-point calculation:
+
+Reorder Point = Average Daily Demand × Lead Time + Safety Stock
+
+Calculate inventory coverage days and estimated stockout dates where sufficient data is available.
+
+Provide:
+- Stockout risk level
+- Expected shortage date
+- Recommended reorder quantity
+- Suggested reorder date
+- Supplier-related risk indicators
+- Explanation behind recommendations
+
+Allow users to simulate changes in demand and supplier lead time.
+
+Do not automatically place purchase orders without explicit authorization.
+
+#### Module 6: Material Compatibility Intelligence
+
+This is a major differentiating feature.
+
+Develop an intelligent material matching system that can identify potentially compatible alternative materials for production requirements.
+
+For example:
+
+A production order requires a specific fabric with:
+- Composition: Cotton
+- Color: Navy Blue
+- GSM: 180
+- Width: 72 inches
+- Construction: Single Jersey
+
+The system should search available inventory and identify materials with potentially compatible characteristics.
+
+Consider:
+- Composition similarity
+- Color similarity
+- GSM difference
+- Width difference
+- Construction similarity
+- Quality grade
+- Production specifications
+
+Use a hybrid matching approach:
+
+1. Apply hard constraints to eliminate clearly unsuitable materials.
+2. Normalize numerical features.
+3. Apply weighted similarity scoring.
+4. Use KNN or another suitable similarity method where appropriate.
+5. Rank candidate materials.
+
+Output:
+- Candidate material
+- Similarity score
+- Matching attributes
+- Attribute differences
+- Available quantity
+- Warehouse location
+- Matching explanation
+- Potential use case
+
+Important:
+
+A high similarity score does not guarantee technical compatibility.
+
+Final approval must be performed by the production, technical, or quality-control team. Do not recommend materials that violate critical production specifications.
+
+#### Module 7: Dead Stock Recovery Engine
+
+This is the central innovation of StockMind AI.
+
+The system should not stop after identifying dead stock. It must recommend possible ways to recover value from underutilized inventory.
+
+Evaluate four recovery strategies:
+
+**A. Reuse in Production**
+- Find production orders requiring similar materials.
+- Use Material Compatibility Intelligence.
+- Estimate the quantity that could potentially be reused.
+- Estimate avoided purchasing cost.
+
+**B. Inter-Warehouse Transfer**
+- Identify warehouses with excess material.
+- Identify warehouses with potential material shortages.
+- Recommend internal stock transfers.
+- Estimate transfer and handling costs.
+
+**C. Resale or Liquidation**
+- Estimate possible resale value using available pricing information.
+- Consider material condition and market assumptions.
+- Estimate selling and logistics costs.
+- Calculate potential net recovery value.
+
+**D. Recycling**
+- Identify materials that cannot reasonably be reused or resold.
+- Estimate recycling value where data is available.
+- Consider disposal or processing costs.
+
+Develop a recovery recommendation engine that ranks strategies based on feasibility and estimated net value.
+
+Suggested financial logic:
+
+Net Recovery Value = Expected Recovery Revenue or Avoided Procurement Cost − Relevant Recovery Costs
+
+Important financial rules:
+
+- Avoid double-counting resale revenue and avoided procurement cost.
+- Consider material condition and technical feasibility.
+- Clearly distinguish estimated value from realized value.
+- Show assumptions behind every estimate.
+- Never present illustrative financial estimates as actual business savings.
+
+Provide:
+- Recommended recovery strategy
+- Estimated recoverable quantity
+- Estimated gross value
+- Estimated costs
+- Estimated net recovery value
+- Recommendation explanation
+- Required approval status
+
+Allow users to approve, reject, or modify a recommendation.
+
+Track actual recovery outcomes to support future evaluation.
+
+#### Module 8: Financial Intelligence and What-If Simulator
+
+Develop a financial analysis module to help decision-makers understand the financial impact of inventory decisions.
+
+Track:
+- Inventory holding cost
+- Blocked working capital
+- Excess inventory value
+- Potential recovery value
+- Avoided procurement cost
+- Stockout-related risk
+- Warehouse transfer cost
+- Recycling or disposal cost
+
+Provide interactive simulations.
+
+Example:
+
+"What happens if we reuse 500 kg of suitable excess fabric instead of purchasing new material?"
+
+Show:
+- Required material quantity
+- Available alternative quantity
+- Estimated avoided procurement cost
+- Additional handling or processing cost
+- Net estimated financial benefit
+
+Use OR-Tools or SciPy for optimization only where the available data and constraints justify it.
+
+#### Module 9: AI Inventory Copilot
+
+Develop an AI-powered assistant that allows users to ask natural-language questions about their inventory.
+
+Example questions:
+
+- Which materials have the highest dead-stock risk?
+- Which materials have not moved recently?
+- What materials may create a stockout next month?
+- Which production orders could use our excess fabric?
+- How much inventory value is currently at risk?
+- What is the best recovery strategy for this material?
+- Which warehouse has excess stock of a specific material?
+
+Use a Retrieval-Augmented Generation architecture.
+
+Proposed workflow:
+
+User Query → Query Understanding → Database Retrieval / Vector Retrieval → Verified Business Data → LLM Response → Source and Data References
+
+Requirements:
+- Retrieve current inventory data from authorized database queries.
+- Use vector search for relevant documentation where appropriate.
+- Ground answers in retrieved data.
+- Provide clear explanations and relevant record references.
+- Clearly state when information is unavailable.
+- Prevent the assistant from inventing inventory values or business records.
+- Respect user roles and permissions.
+- Keep consequential actions behind human approval.
+
+The assistant must not independently modify inventory or create purchase orders without explicit authorization.
+
+#### Module 10: Analytics Dashboard and Reporting
+
+Develop a professional executive dashboard.
+
+Suggested KPI cards:
+
+- Total Inventory Value
+- Total Active Materials
+- Slow-Moving Inventory Value
+- Potential Dead Stock Value
+- Stockout Risk Count
+- Excess Inventory Quantity
+- Potential Recovery Value
+- Inventory Turnover
+
+Charts and visualizations:
+
+- Inventory value by category
+- Inventory distribution by warehouse
+- Stock movement trends
+- Monthly consumption trends
+- Actual vs forecasted demand
+- Dead-stock risk distribution
+- Stockout risk analysis
+- Recovery strategy distribution
+- Estimated vs realized recovery value
+
+Provide:
+- Date filters
+- Warehouse filters
+- Material category filters
+- Downloadable reports
+- CSV and Excel export
+
+Make every KPI and chart traceable to the underlying database records and calculation logic.
+
+---
+
+### 6. Database Architecture
+
+Design a normalized relational database using MySQL.
+
+Suggested core tables:
+
+1. users
+2. roles
+3. permissions
+4. warehouses
+5. suppliers
+6. materials
+7. material_categories
+8. inventory_snapshots
+9. stock_movements
+10. purchase_orders
+11. purchase_order_items
+12. production_orders
+13. bom_items
+14. material_compatibility
+15. demand_forecasts
+16. inventory_risk_assessments
+17. recovery_recommendations
+18. recovery_actions
+19. financial_records
+20. notifications
+21. audit_logs
+22. ai_conversation_logs
+
+You may refine this schema based on sound database design.
+
+Important database principles:
+
+- Use primary and foreign keys.
+- Add appropriate indexes.
+- Use transactions for stock-changing operations.
+- Maintain historical stock movement records.
+- Separate inventory snapshots from movement events.
+- Prevent duplicate or inconsistent stock records.
+- Use timestamps consistently.
+- Preserve data provenance and model prediction versions where relevant.
+
+Do not calculate historical inventory movement solely from the latest stock quantity.
+
+---
+
+### 7. Data Strategy and Dataset Management
+
+The platform should support a hybrid data strategy:
+
+1. Public textile and manufacturing datasets.
+2. Synthetic manufacturing inventory data for controlled testing.
+3. Anonymized real factory data when it becomes available.
+
+Potential public datasets and sources:
+
+**Bangladesh Knitting Dataset**
+https://data.mendeley.com/datasets/vs2vjzkw5h/1
+
+Useful for textile feature analysis and material attribute experimentation.
+
+**Garment Worker Productivity Dataset**
+https://github.com/tamjid-ahsan/Garment-worker-efficiency
+
+Useful for production-context exploration.
+
+**Textile Factory Orders, Products, Inventory and Shift Performance**
+https://databasesample.com/datasets/textile-factory
+
+Potentially useful for database and workflow prototyping.
+
+**Mapped in Bangladesh**
+https://mappedinbangladesh.org/search
+
+Useful for industry-level factory context, not daily inventory movement.
+
+**Retail Store Inventory Forecasting Dataset**
+https://www.kaggle.com/datasets/anirudhchauhan/retail-store-inventory-forecasting-dataset
+
+Useful for baseline forecasting experimentation, but it is not textile manufacturing data.
+
+**M5 Forecasting Dataset**
+https://www.kaggle.com/competitions/m5-forecasting-accuracy/data
+
+Useful as an external forecasting benchmark, but it represents retail demand rather than textile factory consumption.
+
+Important data rules:
+
+- Do not assume any public dataset contains all required inventory fields.
+- Do not merge unrelated datasets without a defensible feature and entity mapping.
+- Clearly document the origin and limitations of every dataset.
+- Label synthetic records as synthetic.
+- Never present synthetic data as real factory data.
+- Create realistic relationships among stock movements, purchases, production orders, and inventory snapshots.
+- Maintain reproducible data-generation scripts.
+
+Suggested synthetic data targets for an initial prototype:
+
+- 200–500 material SKUs
+- 100,000+ daily inventory snapshot records
+- 30,000+ stock movement records
+- 5,000 production orders
+- 3,000 purchase orders
+- 5,000 BOM records
+- 2,000 material compatibility pairs
+- 500 recovery scenarios
+
+These are proposed generation targets, not existing dataset statistics.
+
+---
+
+### 8. Machine Learning Development Standards
+
+For every ML module:
+
+1. Define the prediction or ranking objective.
+2. Identify available features and target labels.
+3. Inspect missing values and data quality.
+4. Perform suitable preprocessing.
+5. Prevent target leakage and temporal leakage.
+6. Create appropriate training, validation, and test datasets.
+7. Establish a simple baseline.
+8. Train and compare suitable models.
+9. Evaluate using relevant metrics.
+10. Save the trained model and preprocessing pipeline.
+11. Expose predictions through backend APIs.
+12. Record prediction timestamps and model versions.
+13. Explain important predictions.
+14. Monitor model performance and data drift where feasible.
+
+Never fabricate model results.
+
+If there is insufficient labelled data, implement a transparent rule-based baseline and clearly identify ML functionality as experimental or planned.
+
+Use MLflow for experiment tracking when model experimentation becomes substantial.
+
+---
+
+### 9. UI/UX Design Requirements
+
+Build a professional SaaS-style interface.
+
+Design direction:
+- Modern enterprise dashboard
+- Clean and minimal layout
+- Professional typography
+- Consistent spacing
+- Dark and light theme support if feasible
+- Responsive design
+- Clear navigation
+- Interactive charts
+- Useful empty states
+- Loading indicators
+- Error handling
+- Confirmation dialogs for critical actions
+
+Suggested navigation:
+
+- Dashboard
+- Inventory
+- Stock Movements
+- Demand Forecasting
+- Inventory Risk
+- Material Matching
+- Dead Stock Recovery
+- Financial Intelligence
+- AI Copilot
+- Reports
+- Notifications
+- Settings
+
+The interface must be intuitive for non-technical factory managers.
+
+Prioritize meaningful information hierarchy over decorative elements.
+
+Avoid excessive animations, unnecessary gradients, overcrowded dashboards, and fake AI visual effects.
+
+---
+
+### 10. Backend API Requirements
+
+Use FastAPI and organize endpoints by domain.
+
+Suggested API groups:
+
+- /api/auth
+- /api/users
+- /api/warehouses
+- /api/suppliers
+- /api/materials
+- /api/inventory
+- /api/stock-movements
+- /api/purchase-orders
+- /api/production-orders
+- /api/forecasting
+- /api/inventory-risk
+- /api/material-matching
+- /api/recovery
+- /api/financial
+- /api/analytics
+- /api/copilot
+- /api/reports
+
+Requirements:
+
+- Validate all incoming data.
+- Use proper HTTP status codes.
+- Implement authentication and authorization.
+- Handle errors consistently.
+- Add pagination and filtering.
+- Document APIs using OpenAPI/Swagger.
+- Keep business logic separate from route handlers.
+- Never expose secrets in source code.
+
+---
+
+### 11. System Architecture
+
+Use a modular architecture.
+
+High-level workflow:
+
+Inventory and Manufacturing Data
+↓
+Data Ingestion and Validation
+↓
+MySQL Database
+↓
+Data Processing and Feature Engineering
+↓
+Machine Learning and Analytics Layer
+↓
+Inventory Risk and Demand Forecasting
+↓
+Material Compatibility Intelligence
+↓
+Dead Stock Recovery Engine
+↓
+Financial Analysis and Recommendations
+↓
+FastAPI Backend
+↓
+React Frontend and AI Inventory Copilot
+
+The AI Copilot should retrieve verified information through controlled backend services rather than directly accessing unrestricted database operations.
+
+Design modules so that ML models, recovery logic, and the frontend can evolve independently.
+
+---
+
+### 12. Security, Reliability, and Quality Requirements
+
+Implement:
+
+- Secure password hashing
+- JWT authentication
+- Role-based access control
+- Input validation
+- SQL injection protection through safe ORM/query practices
+- Environment-based secrets
+- CORS configuration
+- Audit logging
+- Database transaction management
+- Error handling
+- Backup and recovery considerations
+- File upload validation
+- CSV/Excel data validation
+- Rate limiting for sensitive endpoints where appropriate
+
+Do not expose private factory data to unauthorized users or external AI services without appropriate authorization.
+
+---
+
+### 13. Testing and Evaluation
+
+Create tests for:
+
+**Backend**
+- Authentication
+- Inventory CRUD
+- Stock-in and stock-out
+- Warehouse transfers
+- Purchase-order workflows
+- Forecast API
+- Risk classification
+- Material matching
+- Recovery calculations
+- Role-based permissions
+
+**Machine Learning**
+- Data leakage checks
+- Baseline comparison
+- Forecasting evaluation
+- Classification evaluation
+- Matching evaluation
+- Model reproducibility
+
+**Frontend**
+- Navigation
+- Form validation
+- API integration
+- Dashboard data rendering
+- Error and loading states
+- Responsive behavior
+
+**Business Logic**
+- Inventory quantity consistency
+- No negative stock unless explicitly permitted
+- No duplicate stock movements
+- Correct financial calculations
+- No double-counting in recovery-value calculations
+
+Use realistic test scenarios.
+
+---
+
+### 14. Development Roadmap
+
+Develop the project in controlled phases.
+
+**Phase 1 — Project Foundation**
+- Repository structure
+- Frontend setup
+- Backend setup
+- Database connection
+- Authentication
+- Core UI layout
+
+**Phase 2 — Inventory Management**
+- Materials
+- Warehouses
+- Suppliers
+- Inventory records
+- Stock movements
+- CSV/Excel import
+
+**Phase 3 — Inventory Intelligence**
+- Risk detection baseline
+- Demand forecasting baseline
+- Stockout-risk calculation
+- Dashboard analytics
+
+**Phase 4 — Material Compatibility**
+- Material feature engineering
+- Hard constraints
+- Similarity scoring
+- Ranked alternative materials
+- Human approval workflow
+
+**Phase 5 — Dead Stock Recovery**
+- Recovery strategies
+- Recovery recommendation engine
+- Financial estimation
+- Recovery action tracking
+
+**Phase 6 — AI Copilot**
+- Retrieval pipeline
+- Database-grounded questions
+- Vector search for relevant documentation
+- Source-grounded answers
+- Permission-aware retrieval
+
+**Phase 7 — Optimization and Deployment**
+- Performance improvements
+- Testing
+- Model tracking
+- Docker setup
+- Documentation
+- Deployment
+
+Do not attempt to build every advanced module simultaneously. Complete and validate the foundation before moving to dependent features.
+
+---
+
+### 15. Required Deliverables
+
+Throughout development, maintain:
+
+1. Complete project folder structure.
+2. Database schema and migration scripts.
+3. Backend source code.
+4. Frontend source code.
+5. Data ingestion and preprocessing scripts.
+6. Synthetic data generator.
+7. ML training and evaluation scripts.
+8. Saved model artifacts where applicable.
+9. API documentation.
+10. Environment configuration example.
+11. Installation and setup guide.
+12. Testing documentation.
+13. Architecture documentation.
+14. User guide.
+15. Deployment instructions.
+
+Maintain a clear README.md with project overview, features, technology stack, setup instructions, and limitations.
+
+---
+
+### 16. Critical Development Instructions
+
+Follow these rules throughout the project:
+
+1. Do not build a generic inventory management system and simply add an AI chatbot. The AI intelligence and recovery workflow must be central to the product.
+2. Do not fabricate datasets, model accuracy, financial savings, or real-world deployment results.
+3. Do not treat synthetic data as real factory data.
+4. Do not automatically label every inactive material as dead stock.
+5. Do not assume material similarity guarantees production compatibility.
+6. Do not allow an LLM to invent inventory records, quantities, prices, or model predictions.
+7. Keep financial calculations transparent and auditable.
+8. Require human approval for consequential inventory and procurement actions.
+9. Make every AI recommendation explainable where feasible.
+10. Keep the code modular, readable, maintainable, and testable.
+11. Do not generate the entire codebase in one uncontrolled response.
+12. Build and validate the application incrementally.
+13. Do not silently skip errors or use hardcoded data to make a feature appear functional.
+14. If a required dataset or business rule is unavailable, clearly state the limitation and propose a transparent fallback.
+15. Distinguish implemented, experimental, and planned functionality in documentation and the user interface.
+
+---
+
+### 17. How You Should Work With Me
+
+Work as my long-term technical development partner.
+
+Before writing large amounts of code:
+
+1. Analyze the requirements.
+2. Propose the system architecture.
+3. Explain the database relationships.
+4. Define the development phases.
+5. Identify dependencies and risks.
+6. Recommend the most practical implementation order.
+
+Then develop one module at a time.
+
+For every module:
+
+- Explain its purpose.
+- Identify the required database tables.
+- Design its backend APIs.
+- Implement its frontend interface.
+- Explain the business logic.
+- Add suitable tests.
+- Explain how to run and verify it.
+- Identify what is complete and what remains.
+
+When modifying existing code, inspect the existing project structure and relevant files first. Preserve working functionality and avoid unnecessary rewrites.
+
+If an error occurs, investigate its root cause rather than applying random fixes.
+
+Prefer complete, runnable implementations over disconnected code snippets.
+
+**Final Goal:**
+
+Build StockMind AI as a credible, professional, AI-native manufacturing inventory intelligence platform that helps textile manufacturers predict inventory problems, discover alternative material usage, and recover financial value from underutilized stock.
+
+The platform should demonstrate a clear connection between manufacturing data, machine learning, explainable recommendations, financial decision-making, and practical business impact.
